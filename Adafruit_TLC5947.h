@@ -2,7 +2,7 @@
   This is a library for our Adafruit 24-channel PWM/LED driver
 
   Pick one up today in the adafruit shop!
-  ------> http://www.adafruit.com/products/
+  ------> http://www.adafruit.com/products/1429
 
   These drivers uses SPI to communicate, 3 pins are required to  
   interface: Data, Clock and Latch. The boards are chainable

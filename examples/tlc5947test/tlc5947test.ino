@@ -2,7 +2,7 @@
   This is an example for our Adafruit 24-channel PWM/LED driver
 
   Pick one up today in the adafruit shop!
-  ------> http://www.adafruit.com/products/
+  ------> http://www.adafruit.com/products/1429
 
   These drivers uses SPI to communicate, 3 pins are required to  
   interface: Data, Clock and Latch. The boards are chainable
@@ -20,21 +20,21 @@
 // How many boards do you have chained?
 #define NUM_TLC5974 1
 
-#define _data   4
-#define _clock   5
-#define _latch   6
-#define _enable  -1  // set to -1 to not use the enable pin (its optional)
+#define data   4
+#define clock   5
+#define latch   6
+#define oe  -1  // set to -1 to not use the enable pin (its optional)
 
-Adafruit_TLC5947 tlc = Adafruit_TLC5947(NUM_TLC5974, _clock, _data, _latch);
+Adafruit_TLC5947 tlc = Adafruit_TLC5947(NUM_TLC5974, clock, data, latch);
 
 void setup() {
   Serial.begin(9600);
   
   Serial.println("TLC5974 test");
   tlc.begin();
-  if (_enable >= 0) {
-    pinMode(_enable, OUTPUT);
-    digitalWrite(_enable, LOW);
+  if (oe >= 0) {
+    pinMode(oe, OUTPUT);
+    digitalWrite(oe, LOW);
   }
 }
 

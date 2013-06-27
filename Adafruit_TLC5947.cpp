@@ -2,7 +2,7 @@
   This is a library for our Adafruit 24-channel PWM/LED driver
 
   Pick one up today in the adafruit shop!
-  ------> http://www.adafruit.com/products/
+  ------> http://www.adafruit.com/products/1429
 
   These drivers uses SPI to communicate, 3 pins are required to  
   interface: Data, Clock and Latch. The boards are chainable
@@ -30,7 +30,7 @@ Adafruit_TLC5947::Adafruit_TLC5947(uint8_t n, uint8_t c, uint8_t d, uint8_t l) {
 void Adafruit_TLC5947::write(void) {
   digitalWrite(_lat, LOW);
   // 24 channels per TLC5974
-  for (uint8_t c=0; c < 24*numdrivers; c++) {
+  for (int8_t c=24*numdrivers - 1; c >= 0 ; c--) {
     // 12 bits per channel, send MSB first
     for (int8_t b=11; b>=0; b--) {
       digitalWrite(_clk, LOW);
