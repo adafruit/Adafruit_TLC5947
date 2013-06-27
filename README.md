@@ -1,7 +1,7 @@
 Adafruit_TLC5947
 ================
 
-/*************************************************** 
+
   This is a library for our Adafruit 24-channel PWM/LED driver
 
   Pick one up today in the adafruit shop!
@@ -16,4 +16,3 @@ Adafruit_TLC5947
 
   Written by Limor Fried/Ladyada for Adafruit Industries.  
   BSD license, all text above must be included in any redistribution
- ****************************************************/
