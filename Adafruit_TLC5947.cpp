@@ -14,64 +14,64 @@
   Written by Limor Fried/Ladyada for Adafruit Industries.  
   BSD license, all text above must be included in any redistribution
  ****************************************************/
-
-
 #include <Adafruit_TLC5947.h>
 
-Adafruit_TLC5947::Adafruit_TLC5947(uint8_t n, uint8_t c, uint8_t d, uint8_t l) {
+Adafruit_TLC5947::Adafruit_TLC5947(uint32_t n, uint32_t c, uint32_t d, uint32_t l, uint32_t b) {
   numdrivers = n;
   _clk = c;
   _dat = d;
   _lat = l;
-
-  pwmbuffer = (uint16_t *)calloc(2, 24*n);
+  _blk = b;
+  pwmbuffer = (uint32_t *)calloc(24*n, sizeof(uint32_t));
 }
 
 void Adafruit_TLC5947::write(void) {
+  digitalWrite(_blk, HIGH);
   digitalWrite(_lat, LOW);
-  // 24 channels per TLC5974
-  for (int8_t c=24*numdrivers - 1; c >= 0 ; c--) {
-    // 12 bits per channel, send MSB first
-    for (int8_t b=11; b>=0; b--) {
+  digitalWrite(_blk, LOW);
+  for (int32_t c=24*numdrivers - 1; c >= 0 ; c--) {
+    for (int32_t b=11; b>=0; b--) {
       digitalWrite(_clk, LOW);
-      
-      if (pwmbuffer[c] & (1 << b))  
+      if (pwmbuffer[c] & (1 << b))   {
         digitalWrite(_dat, HIGH);
-      else
+        //Serial.println(1);
+      } else {
         digitalWrite(_dat, LOW);
-
+        //Serial.println(0);
+       }
       digitalWrite(_clk, HIGH);
     }
   }
   digitalWrite(_clk, LOW);
-  
   digitalWrite(_lat, HIGH);  
   digitalWrite(_lat, LOW);
 }
 
-
-
-void Adafruit_TLC5947::setPWM(uint8_t chan, uint16_t pwm) {
+void Adafruit_TLC5947::setPWM(uint32_t chan, uint32_t pwm) {
   if (pwm > 4095) pwm = 4095;
   if (chan > 24*numdrivers) return;
   pwmbuffer[chan] = pwm;  
 }
 
-
-void Adafruit_TLC5947::setLED(uint8_t lednum, uint16_t r, uint16_t g, uint16_t b) {
-  setPWM(lednum*3, r);
-  setPWM(lednum*3+1, g);
-  setPWM(lednum*3+2, b);
+void Adafruit_TLC5947::setLED(uint32_t lednum, uint32_t b, uint32_t r, uint32_t g) {
+  setPWM(lednum*3, b);
+  setPWM(lednum*3+1, r);
+  setPWM(lednum*3+2, g);
 }
-
 
 boolean Adafruit_TLC5947::begin() {
   if (!pwmbuffer) return false;
-
   pinMode(_clk, OUTPUT);
   pinMode(_dat, OUTPUT);
   pinMode(_lat, OUTPUT);
-  digitalWrite(_lat, LOW);
-
+  pinMode(_blk, OUTPUT);
   return true;
+}
+
+void Adafruit_TLC5947::print() {
+	for(int i = 0;i < 192;++i) {
+		Serial.println(pwmbuffer[i]);
+		Serial.println(' ');
+	}
+	Serial.println("END");
 }
