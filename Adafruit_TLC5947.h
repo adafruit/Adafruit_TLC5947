@@ -21,15 +21,14 @@
 
 class Adafruit_TLC5947 {
  public:
-  Adafruit_TLC5947(uint32_t n, uint32_t c, uint32_t d, uint32_t l, uint32_t b);
+  Adafruit_TLC5947(uint8_t n, uint8_t c, uint8_t d, uint8_t l, uint8_t b);
   boolean begin(void);
-  void setPWM(uint32_t chan, uint32_t pwm);
-  void setLED(uint32_t lednum, uint32_t r, uint32_t g, uint32_t b);
+  void setPWM(uint16_t chan, uint16_t pwm);
+  void setLED(uint16_t lednum, uint16_t b, uint16_t r, uint16_t g);
   void write(void);
-  void print();
  private:
-  uint32_t *pwmbuffer;
-  uint32_t numdrivers, _clk, _dat, _lat, _blk;
+  uint16_t *pwmbuffer;
+  uint8_t num, _clk, _dat, _lat, _blk;
 };
 
 #endif
