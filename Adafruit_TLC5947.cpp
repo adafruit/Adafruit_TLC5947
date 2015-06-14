@@ -45,13 +45,14 @@ void Adafruit_TLC5947::write(void) {
   digitalWrite(_lat, LOW);
 }
 
-void Adafruit_TLC5947::setPWM(const uint8_t& chan, const uint8_t& pwm) {
-  if (pwm > 4095) pwm = 4095;
+void Adafruit_TLC5947::setPWM(const uint16_t& chan, const uint16_t& pwm) {
+  uint16_t val;
+  val = pwm > 4095 ? 4095 : pwm;
   if (chan > 24*num) return;
-  pwmbuffer[chan] = pwm;  
+  pwmbuffer[chan] = val;  
 }
 
-void Adafruit_TLC5947::setLED(const uint8_t& lednum, const uint8_t& b, const uint8_t& r, const uint8_t& g) {
+void Adafruit_TLC5947::setLED(const uint8_t& lednum, const uint16_t& b, const uint16_t& r, const uint16_t& g) {
   setPWM(lednum*3, b);
   setPWM(lednum*3+1, r);
   setPWM(lednum*3+2, g);
