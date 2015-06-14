@@ -24,8 +24,8 @@ class Adafruit_TLC5947 {
   Adafruit_TLC5947(const uint8_t& n, const uint8_t& c, const uint8_t& d, const uint8_t& l, const uint8_t& b);
   ~Adafruit_TLC5947(void);
   boolean begin(void);
-  void setPWM(const uint8_t& chan, const uint8_t& pwm);
-  void setLED(const uint8_t& lednum, const uint8_t& b, const uint8_t& r, uint16_t g);
+  void setPWM(const uint16_t& chan, const uint16_t& pwm);
+  void setLED(const uint8_t& lednum, const uint16_t& b, const uint16_t& r, const uint16_t& g);
   void write(void);
  private:
   uint16_t *pwmbuffer;
