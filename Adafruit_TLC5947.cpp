@@ -14,64 +14,57 @@
   Written by Limor Fried/Ladyada for Adafruit Industries.  
   BSD license, all text above must be included in any redistribution
  ****************************************************/
-
-
 #include <Adafruit_TLC5947.h>
 
-Adafruit_TLC5947::Adafruit_TLC5947(uint8_t n, uint8_t c, uint8_t d, uint8_t l) {
-  numdrivers = n;
+Adafruit_TLC5947::Adafruit_TLC5947(const uint8_t& n, const uint8_t& c, const uint8_t& d, const uint8_t& l, const uint8_t& b = -1) {
+  num = n;
   _clk = c;
   _dat = d;
   _lat = l;
+  _blk = b;
+  pwmbuffer = (uint16_t *)calloc(24*n, sizeof(uint16_t));
+}
 
-  pwmbuffer = (uint16_t *)calloc(2, 24*n);
+Adafruit_TLC5947::~Adafruit_TLC5947(void) {
+  free(pwmbuffer);
 }
 
 void Adafruit_TLC5947::write(void) {
+  if(_blk > -1)
+    digitalWrite(_blk, LOW);
   digitalWrite(_lat, LOW);
-  // 24 channels per TLC5974
-  for (int8_t c=24*numdrivers - 1; c >= 0 ; c--) {
-    // 12 bits per channel, send MSB first
+  for (int16_t c = 24*num - 1;c >= 0;--c) {
     for (int8_t b=11; b>=0; b--) {
       digitalWrite(_clk, LOW);
-      
-      if (pwmbuffer[c] & (1 << b))  
-        digitalWrite(_dat, HIGH);
-      else
-        digitalWrite(_dat, LOW);
-
+      (pwmbuffer[c] & (1 << b)) ? digitalWrite(_dat, HIGH) : digitalWrite(_dat, LOW);
       digitalWrite(_clk, HIGH);
     }
   }
   digitalWrite(_clk, LOW);
-  
   digitalWrite(_lat, HIGH);  
   digitalWrite(_lat, LOW);
 }
 
-
-
-void Adafruit_TLC5947::setPWM(uint8_t chan, uint16_t pwm) {
+void Adafruit_TLC5947::setPWM(const uint8_t& chan, const uint8_t& pwm) {
   if (pwm > 4095) pwm = 4095;
-  if (chan > 24*numdrivers) return;
+  if (chan > 24*num) return;
   pwmbuffer[chan] = pwm;  
 }
 
-
-void Adafruit_TLC5947::setLED(uint8_t lednum, uint16_t r, uint16_t g, uint16_t b) {
-  setPWM(lednum*3, r);
-  setPWM(lednum*3+1, g);
-  setPWM(lednum*3+2, b);
+void Adafruit_TLC5947::setLED(const uint8_t& lednum, const uint8_t& b, const uint8_t& r, const uint8_t& g) {
+  setPWM(lednum*3, b);
+  setPWM(lednum*3+1, r);
+  setPWM(lednum*3+2, g);
 }
-
 
 boolean Adafruit_TLC5947::begin() {
   if (!pwmbuffer) return false;
-
   pinMode(_clk, OUTPUT);
   pinMode(_dat, OUTPUT);
   pinMode(_lat, OUTPUT);
-  digitalWrite(_lat, LOW);
-
+  if(_blk > -1) {
+    pinMode(_blk, OUTPUT);
+    digitalWrite(_blk, HIGH);
+  }
   return true;
 }
