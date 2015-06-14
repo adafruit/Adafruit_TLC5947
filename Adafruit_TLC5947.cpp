@@ -16,7 +16,7 @@
  ****************************************************/
 #include <Adafruit_TLC5947.h>
 
-Adafruit_TLC5947::Adafruit_TLC5947(uint8_t n, uint8_t c, uint8_t d, uint8_t l, uint8_t b) {
+Adafruit_TLC5947::Adafruit_TLC5947(const uint8_t& n, const uint8_t& c, const uint8_t& d, const uint8_t& l, const uint8_t& b) {
   num = n;
   _clk = c;
   _dat = d;
@@ -25,18 +25,18 @@ Adafruit_TLC5947::Adafruit_TLC5947(uint8_t n, uint8_t c, uint8_t d, uint8_t l, u
   pwmbuffer = (uint16_t *)calloc(24*n, sizeof(uint16_t));
 }
 
+Adafruit_TLC5947::~Adafruit_TLC5947(void) {
+  free(pwmbuffer);
+}
+
 void Adafruit_TLC5947::write(void) {
   digitalWrite(_blk, HIGH);
   digitalWrite(_lat, LOW);
   digitalWrite(_blk, LOW);
-  for (int16_t c=24*num - 1; c >= 0 ; c--) {
+  for (int16_t c = 24*num - 1;c >= 0;--c) {
     for (int8_t b=11; b>=0; b--) {
       digitalWrite(_clk, LOW);
-      if (pwmbuffer[c] & (1 << b))   {
-        digitalWrite(_dat, HIGH);
-      } else {
-        digitalWrite(_dat, LOW);
-       }
+      (pwmbuffer[c] & (1 << b)) ? digitalWrite(_dat, HIGH) : digitalWrite(_dat, LOW);
       digitalWrite(_clk, HIGH);
     }
   }
@@ -45,13 +45,13 @@ void Adafruit_TLC5947::write(void) {
   digitalWrite(_lat, LOW);
 }
 
-void Adafruit_TLC5947::setPWM(uint16_t chan, uint16_t pwm) {
+void Adafruit_TLC5947::setPWM(const uint8_t& chan, const uint8_t& pwm) {
   if (pwm > 4095) pwm = 4095;
   if (chan > 24*num) return;
   pwmbuffer[chan] = pwm;  
 }
 
-void Adafruit_TLC5947::setLED(uint16_t lednum, uint16_t b, uint16_t r, uint16_t g) {
+void Adafruit_TLC5947::setLED(const uint8_t& lednum, const uint8_t& b, const uint8_t& r, const uint8_t& g) {
   setPWM(lednum*3, b);
   setPWM(lednum*3+1, r);
   setPWM(lednum*3+2, g);
