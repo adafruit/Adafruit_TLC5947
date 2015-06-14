@@ -16,7 +16,7 @@
  ****************************************************/
 #include <Adafruit_TLC5947.h>
 
-Adafruit_TLC5947::Adafruit_TLC5947(const uint8_t& n, const uint8_t& c, const uint8_t& d, const uint8_t& l, const uint8_t& b) {
+Adafruit_TLC5947::Adafruit_TLC5947(const uint8_t& n, const uint8_t& c, const uint8_t& d, const uint8_t& l, const uint8_t& b = -1) {
   num = n;
   _clk = c;
   _dat = d;
@@ -30,9 +30,9 @@ Adafruit_TLC5947::~Adafruit_TLC5947(void) {
 }
 
 void Adafruit_TLC5947::write(void) {
-  digitalWrite(_blk, HIGH);
+  if(_blk > -1)
+    digitalWrite(_blk, LOW);
   digitalWrite(_lat, LOW);
-  digitalWrite(_blk, LOW);
   for (int16_t c = 24*num - 1;c >= 0;--c) {
     for (int8_t b=11; b>=0; b--) {
       digitalWrite(_clk, LOW);
@@ -62,6 +62,9 @@ boolean Adafruit_TLC5947::begin() {
   pinMode(_clk, OUTPUT);
   pinMode(_dat, OUTPUT);
   pinMode(_lat, OUTPUT);
-  pinMode(_blk, OUTPUT);
+  if(_blk > -1) {
+    pinMode(_blk, OUTPUT);
+    digitalWrite(_blk, HIGH);
+  }
   return true;
 }
