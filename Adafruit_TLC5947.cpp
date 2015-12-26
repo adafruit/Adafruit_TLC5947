@@ -24,7 +24,9 @@ Adafruit_TLC5947::Adafruit_TLC5947(uint8_t n, uint8_t c, uint8_t d, uint8_t l) {
   _dat = d;
   _lat = l;
 
-  pwmbuffer = (uint16_t *)calloc(2, 24*n);
+  //pwmbuffer = (uint16_t *)calloc(2, 24*n);
+  pwmbuffer = (uint16_t *)malloc(2 * 24*n);
+  memset(pwmbuffer, 0, 2*24*n);
 }
 
 void Adafruit_TLC5947::write(void) {
