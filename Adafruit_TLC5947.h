@@ -35,7 +35,7 @@ public:
 
   void setPWM(uint16_t chan, uint16_t pwm);
   void setLED(uint16_t lednum, uint16_t r, uint16_t g, uint16_t b);
-  void write(void);
+  void write();
 
 private:
   uint16_t *pwmbuffer;

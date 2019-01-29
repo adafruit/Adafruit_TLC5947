@@ -51,7 +51,11 @@ Adafruit_TLC5947::Adafruit_TLC5947(uint16_t n, uint8_t c, uint8_t d,
   memset(pwmbuffer, 0, 2 * 24 * n);
 }
 
-void Adafruit_TLC5947::write(void) {
+
+/*!
+ *    @brief  Writes to the board
+ */
+void Adafruit_TLC5947::write() {
   digitalWrite(_lat, LOW);
   // 24 channels per TLC5974
   for (int16_t c = 24 * numdrivers - 1; c >= 0; c--) {
