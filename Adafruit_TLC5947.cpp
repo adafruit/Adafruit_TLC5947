@@ -30,15 +30,15 @@
 #include <Adafruit_TLC5947.h>
 
 /*!
- *    @brief  Instantiates a new MCP9808 class
+ *    @brief  Instantiates a new TLC5947 class
  *    @param  n
  *            num of drivers (boards)
  *    @param  c
- *            clock
+ *            Arduino pin connected to TLC5947 clock pin
  *    @param  d
- *            data
+ *            Arduino pin connected to TLC5947 data pin
  *    @param  l
- *            latch
+ *            Arduino pin connected to TLC5947 latch pin
  */
 Adafruit_TLC5947::Adafruit_TLC5947(uint16_t n, uint8_t c, uint8_t d,
                                    uint8_t l) {
@@ -53,7 +53,7 @@ Adafruit_TLC5947::Adafruit_TLC5947(uint16_t n, uint8_t c, uint8_t d,
 
 
 /*!
- *    @brief  Writes to the board
+ *    @brief  Writes PWM data to the all connected TLC5947 boards
  */
 void Adafruit_TLC5947::write() {
   digitalWrite(_lat, LOW);
@@ -80,9 +80,9 @@ void Adafruit_TLC5947::write() {
 /*!
  *    @brief  Set the PWM channel / value
  *    @param  chan
- *            channel number
+ *            channel number ([0 - 23] on each board, so chanel 2 for second board will be 25)
  *    @param  pwm
- *            pwm value
+ *            pwm value [0-4095]
  */
 void Adafruit_TLC5947::setPWM(uint16_t chan, uint16_t pwm) {
   if (pwm > 4095)
@@ -97,11 +97,11 @@ void Adafruit_TLC5947::setPWM(uint16_t chan, uint16_t pwm) {
  *    @param  lednum
  *            led number
  *    @param  r
- *            red value
+ *            red value [0-255]
  *    @param  g
- *            green value
+ *            green value [0-255]
  *    @param  b
- *            blue value
+ *            blue value [0-255]
  */
 void Adafruit_TLC5947::setLED(uint16_t lednum, uint16_t r, uint16_t g,
                               uint16_t b) {
