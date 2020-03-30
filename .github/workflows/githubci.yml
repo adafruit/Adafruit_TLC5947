@@ -28,5 +28,5 @@ jobs:
     - name: doxygen
       env:
         GH_REPO_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
-        PRETTYNAME : "Adafruit_TLC5947"
+        PRETTYNAME : "Adafruit TLC5947 Arduino Library"
       run: bash ci/doxy_gen_and_deploy.sh
