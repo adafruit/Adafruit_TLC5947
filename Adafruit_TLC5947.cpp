@@ -51,7 +51,6 @@ Adafruit_TLC5947::Adafruit_TLC5947(uint16_t n, uint8_t c, uint8_t d,
   memset(pwmbuffer, 0, 2 * 24 * n);
 }
 
-
 /*!
  *    @brief  Writes PWM data to the all connected TLC5947 boards
  */
@@ -80,7 +79,8 @@ void Adafruit_TLC5947::write() {
 /*!
  *    @brief  Set the PWM channel / value
  *    @param  chan
- *            channel number ([0 - 23] on each board, so chanel 2 for second board will be 25)
+ *            channel number ([0 - 23] on each board, so chanel 2 for second
+ * board will be 25)
  *    @param  pwm
  *            pwm value [0-4095]
  */
