@@ -1,4 +1,4 @@
-# Adafruit TLC5947 [![Build Status](https://github.com/adafruit/Adafruit_TLC5947/workflows/Arduino%20Library%20CI/badge.svg)](https://github.com/adafruit/Adafruit_TLC5947/actions)
+# Adafruit TLC5947 [![Build Status](https://github.com/adafruit/Adafruit_TLC5947/workflows/Arduino%20Library%20CI/badge.svg)](https://github.com/adafruit/Adafruit_TLC5947/actions)[![Documentation](https://github.com/adafruit/ci-arduino/blob/master/assets/doxygen_badge.svg)](http://adafruit.github.io/Adafruit_TLC5947/html/index.html)
 
 <a href="https://www.adafruit.com/product/1429"><img src="assets/board.jpg?raw=true" width="500px"></a>
 
