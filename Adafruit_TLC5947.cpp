@@ -93,6 +93,21 @@ void Adafruit_TLC5947::setPWM(uint16_t chan, uint16_t pwm) {
 }
 
 /*!
+ *    @brief  Get the PWM value for channel. Return 0 for invalid channels.
+ *    @param  chan
+ *            channel number ([0 - 23] on each board, so channel 2 for second
+ * board will be 25)
+ */
+uint16_t Adafruit_TLC5947::getPWM(uint16_t chan) {
+  if (chan >= 24 * numdrivers) {
+    return 0;
+  }
+  else {
+    return pwmbuffer[chan];
+  }
+}
+
+/*!
  *    @brief  Set LED
  *    @param  lednum
  *            led number
