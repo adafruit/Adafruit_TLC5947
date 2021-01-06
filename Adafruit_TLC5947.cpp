@@ -101,8 +101,7 @@ void Adafruit_TLC5947::setPWM(uint16_t chan, uint16_t pwm) {
 uint16_t Adafruit_TLC5947::getPWM(uint16_t chan) {
   if (chan >= 24 * numdrivers) {
     return 0;
-  }
-  else {
+  } else {
     return pwmbuffer[chan];
   }
 }
