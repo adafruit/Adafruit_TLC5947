@@ -79,7 +79,7 @@ void Adafruit_TLC5947::write() {
 /*!
  *    @brief  Set the PWM channel / value
  *    @param  chan
- *            channel number ([0 - 23] on each board, so chanel 2 for second
+ *            channel number ([0 - 23] on each board, so channel 2 for second
  * board will be 25)
  *    @param  pwm
  *            pwm value [0-4095]
@@ -87,7 +87,7 @@ void Adafruit_TLC5947::write() {
 void Adafruit_TLC5947::setPWM(uint16_t chan, uint16_t pwm) {
   if (pwm > 4095)
     pwm = 4095;
-  if (chan > 24 * numdrivers)
+  if (chan >= 24 * numdrivers)
     return;
   pwmbuffer[chan] = pwm;
 }
