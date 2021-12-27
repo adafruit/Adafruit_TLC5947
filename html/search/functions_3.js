@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['write',['write',['../class_adafruit___t_l_c5947.html#a0bc8c7685406c6d926526ca1a7ca372b',1,'Adafruit_TLC5947']]]
+  ['setled',['setLED',['../class_adafruit___t_l_c5947.html#a342e562ebbdeae8fdaf3ace0a91ae78d',1,'Adafruit_TLC5947']]],
+  ['setpwm',['setPWM',['../class_adafruit___t_l_c5947.html#adad864cc04645526f8acb0d9c8fbc9d2',1,'Adafruit_TLC5947']]]
 ];

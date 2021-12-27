@@ -86,6 +86,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adad864cc04645526f8acb0d9c8fbc9d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___t_l_c5947.html#adad864cc04645526f8acb0d9c8fbc9d2">setPWM</a> (uint16_t chan, uint16_t pwm)</td></tr>
 <tr class="memdesc:adad864cc04645526f8acb0d9c8fbc9d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the PWM channel / value.  <a href="#adad864cc04645526f8acb0d9c8fbc9d2">More...</a><br /></td></tr>
 <tr class="separator:adad864cc04645526f8acb0d9c8fbc9d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81b6049387b4fd587046253fd69511f3"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___t_l_c5947.html#a81b6049387b4fd587046253fd69511f3">getPWM</a> (uint16_t chan)</td></tr>
+<tr class="memdesc:a81b6049387b4fd587046253fd69511f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the PWM value for channel.  <a href="#a81b6049387b4fd587046253fd69511f3">More...</a><br /></td></tr>
+<tr class="separator:a81b6049387b4fd587046253fd69511f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a342e562ebbdeae8fdaf3ace0a91ae78d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___t_l_c5947.html#a342e562ebbdeae8fdaf3ace0a91ae78d">setLED</a> (uint16_t lednum, uint16_t r, uint16_t g, uint16_t b)</td></tr>
 <tr class="memdesc:a342e562ebbdeae8fdaf3ace0a91ae78d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set LED.  <a href="#a342e562ebbdeae8fdaf3ace0a91ae78d">More...</a><br /></td></tr>
 <tr class="separator:a342e562ebbdeae8fdaf3ace0a91ae78d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -204,6 +207,33 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a81b6049387b4fd587046253fd69511f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81b6049387b4fd587046253fd69511f3">&#9670;&nbsp;</a></span>getPWM()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t Adafruit_TLC5947::getPWM </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>chan</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the PWM value for channel. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">chan</td><td>channel number ([0 - 23] on each board, so channel 2 for second board will be 25) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>PWM value ([0 - 4095]) for valid channels, 0 for non-existing channels. </dd></dl>
 
 </div>
 </div>
