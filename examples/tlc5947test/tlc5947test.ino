@@ -25,12 +25,12 @@
 #define latch   6
 #define oe  -1  // set to -1 to not use the enable pin (its optional)
 
-Adafruit_TLC5947 tlc = Adafruit_TLC5947(NUM_TLC5974, clock, data, latch);
+Adafruit_TLC5947 tlc = Adafruit_TLC5947(NUM_TLC5947, clock, data, latch);
 
 void setup() {
   Serial.begin(9600);
   
-  Serial.println("TLC5974 test");
+  Serial.println("TLC5947 test");
   tlc.begin();
   if (oe >= 0) {
     pinMode(oe, OUTPUT);
