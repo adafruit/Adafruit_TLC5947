@@ -13,24 +13,26 @@
 
   Written by Limor Fried/Ladyada for Adafruit Industries.  
   BSD license, all text above must be included in any redistribution
+
+  Fixed typo in all occurences of NUM_TLC5947 (was 5974)
  ****************************************************/
 
 #include "Adafruit_TLC5947.h"
 
 // How many boards do you have chained?
-#define NUM_TLC5974 1
+#define NUM_TLC5947 1
 
 #define data   4
 #define clock   5
 #define latch   6
 #define oe  -1  // set to -1 to not use the enable pin (its optional)
 
-Adafruit_TLC5947 tlc = Adafruit_TLC5947(NUM_TLC5974, clock, data, latch);
+Adafruit_TLC5947 tlc = Adafruit_TLC5947(NUM_TLC5947, clock, data, latch);
 
 void setup() {
   Serial.begin(9600);
   
-  Serial.println("TLC5974 test");
+  Serial.println("TLC5947 test");
   tlc.begin();
   if (oe >= 0) {
     pinMode(oe, OUTPUT);
@@ -51,7 +53,7 @@ void loop() {
 
 // Fill the dots one after the other with a color
 void colorWipe(uint16_t r, uint16_t g, uint16_t b, uint8_t wait) {
-  for(uint16_t i=0; i<8*NUM_TLC5974; i++) {
+  for(uint16_t i=0; i<8*NUM_TLC5947; i++) {
       tlc.setLED(i, r, g, b);
       tlc.write();
       delay(wait);
@@ -63,8 +65,8 @@ void rainbowCycle(uint8_t wait) {
   uint32_t i, j;
 
   for(j=0; j<4096; j++) { // 1 cycle of all colors on wheel
-    for(i=0; i< 8*NUM_TLC5974; i++) {
-      Wheel(i, ((i * 4096 / (8*NUM_TLC5974)) + j) & 4095);
+    for(i=0; i< 8*NUM_TLC5947; i++) {
+      Wheel(i, ((i * 4096 / (8*NUM_TLC5947)) + j) & 4095);
     }
     tlc.write();
     delay(wait);
